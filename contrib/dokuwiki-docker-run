@@ -4,7 +4,7 @@ set -euo pipefail
 
 # Set -e DOKU_DOCKER_STRICT=false to debug
 
-dock-x run \
+export DOCK_X_RUN_OPTIONS="\
   -e DOKU_DOCKER_STRICT=true \
   -e DOKU_DOCKER_ENV=dev \
   -e DOKU_DOCKER_STARTER_SITE=true \
@@ -16,4 +16,6 @@ dock-x run \
   -v "$PWD"/resources/comboctl:/opt/comboctl \
   -v "$PWD"/resources/phpctl:/opt/phpctl \
   -v "$PWD"/resources/conf/bash-env/profile.d:/etc/profile.d \
-  -v "$PWD"/resources/conf/caddy/Caddyfile:/etc/caddy/Caddyfile
+  -v "$PWD"/resources/conf/caddy/Caddyfile:/etc/caddy/Caddyfile"
+
+dock-x run

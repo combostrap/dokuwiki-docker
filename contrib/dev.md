@@ -7,6 +7,7 @@ The entrypoint is [dokuwiki-docker-entrypoint](../resources/dokuwiki-docker/bin/
 
 ## How to develop the Docker image
 
+* Change the dokuwiki version in [.envrc](../.envrc) if relevant
 * Change the [Dockerfile](../Dockerfile)
 * Build
 ```bash
@@ -14,9 +15,9 @@ dock-x build
 ```
 * Push if satisfied
 ```bash
-dock-x push
+dock-x push # push 
+DOCK_X_TAG="php8.3-latest" dock-x push # push as latest
 ```
-
 
 ## How to develop the bash scripts and configuration
 
@@ -24,7 +25,7 @@ dock-x push
 ```bash
 cd ~/code/dokuwiki-docker
 ```
-* Use the last build as some script need Dokuwiki scripts
+* Use the last build as some script need DokuWiki scripts
 ```bash
 dock-x build
 ```

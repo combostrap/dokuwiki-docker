@@ -1,10 +1,10 @@
-# Dokuwiki in Docker
+# DokuWiki in Docker
 
 
 ## About
 This repository contains the `Dokuwiki in Docker` image.
 
-Get a Dokuwiki installation with a website in a single line of command.
+Get a DokuWiki installation with a website in a single line of command.
 
 ## Example: Starter Web Site
 
@@ -35,7 +35,7 @@ You got out of the box:
 * [Automatic Search Index Update](#how-to-disable-the-automatic-update-of-the-search-index)
 * [Automatic Plugins Installation](https://combostrap.com/admin/combostrap-website-yolv2qw6#plugins)
 * SEO Ready: [SiteMap Enabled by default to 5 days](https://combostrap.com/seo/combostrap-seo-sitemap-saio2v87#enable)
-* [Healthcheck Endpoint](#get-healthcheck--liveness--probes--container-state)
+* [Health check Endpoint](#get-healthcheck--liveness--probes--container-state)
 * [Metrics Endpoint](#how-to-monitor-dokuwiki-docker)
 * [Last Patches](resources/dokuwiki-docker/meta/dokuwiki-patches)
 * [Dev Mode](#set-in-dev-mode)
@@ -110,15 +110,14 @@ docker run \
 ```
 * On Windows, don't bind mount a local directory as volume. See [perf](#poor-windows-perf-with-local-directory-volume)
 
-On a desktop, Dokuwiki would be available at: http://localhost:8081 
+On a desktop, DokuWiki would be available at: http://localhost:8081 
 
 Note: If the [volume](#why-the-volume-contains-a-whole-dokuwiki-installation) is empty, after the run, it will be filled
-with a new dokuwiki installation.
+with a new DokuWiki installation.
 
-### Choose the installed dokuwiki version
+### Choose the installed DokuWiki version
 
-The latest image contains the dokuwiki version [DokuWiki 2025-05-14a "Librarian"](https://github.com/dokuwiki/dokuwiki/releases/tag/release-2025-05-14a)
-
+The latest image contains the DokuWiki version [DokuWiki 2025-05-14b "Librarian"](https://github.com/dokuwiki/dokuwiki/releases/tag/release-2025-05-14b)
 
 
 Example with the [2024-02-06b "Kaos" release](https://github.com/dokuwiki/dokuwiki/releases/tag/release-2024-02-06b)
@@ -130,7 +129,7 @@ docker run \
   -p 8081:80 \
   ghcr.io/combostrap/dokuwiki:php8.3-2024-02-06b
 ```
-* any other any [version](https://github.com/dokuwiki/dokuwiki/releases)  via the `DOKUWIKI_VERSION` environment. Dokuwiki is then downloaded and installed.
+* any other any [version](https://github.com/dokuwiki/dokuwiki/releases)  via the `DOKUWIKI_VERSION` environment. DokuWiki is then downloaded and installed.
 ```bash
 docker run \
   --name combo-site-starter \
@@ -141,15 +140,15 @@ docker run \
 ```
 
 
-### Get Healthcheck / Liveness / Probes / Container State
+### Get Health check / Liveness / Probes / Container State
 
-If you wish to set a healthcheck point, you may use:
-* the dokuwiki ping endpoint `/dokuwiki-docker/ping.php` (ie [ping.php endpoint](resources/dokuwiki-docker/meta/status/ping.php))
+If you wish to set a Health check point, you may use:
+* the DokuWiki ping endpoint `/dokuwiki-docker/ping.php` (ie [ping.php endpoint](resources/dokuwiki-docker/meta/status/ping.php))
 * or the php-fpm endpoint `/php-fpm/doku/ping` (ie to the `ping.path` and `ping.response` [configurations](resources/conf/php-fpm/pages.conf))
 
 Note that:
 * if the [page php-fpm](#configure-php-fpm-pool) is full because there is too much request (bots or visitors), 
-the dokuwiki ping will fail while the php-fpm endpoint will not
+the DokuWiki ping will fail while the php-fpm endpoint will not
 * if you want more control on `php-fpm`, you can create your own image and use the [php-fpm-healthcheck](https://github.com/renatomefi/php-fpm-healthcheck)
 
 Example:
@@ -414,6 +413,17 @@ docker run \
 ```
 
 Note: You can change the `dokudata` value to whatever you want.
+
+### Update the Docker image
+
+We support for now only one tag by php version, therefore you need to delete the image before pulling it again
+
+Example for `php8.3`
+```bash
+docker rmi ghcr.io/combostrap/dokuwiki:php8.3-latest
+docker pull ghcr.io/combostrap/dokuwiki:php8.3-latest
+```
+
 
 
 ### How to disable the automatic update of the search index
@@ -751,18 +761,15 @@ Example of graph: the max and average request durations of https://combostrap.co
 
 ### Docker Tag
 
-The list of all available version can be found [here](https://github.com/ComboStrap/dokuwiki-docker/pkgs/container/dokuwiki)
+We support for now only one tag by php version, therefore you need to [delete the image before pulling it again](#update-the-docker-image)
 
 ```bash
-php8.3-xxxx
+php8.3-latest
 ```
 where:
 * `phpX.X` is the php version used
-* `xxxxx` is the version of Dokuwiki
-  * `latest` is the latest pushed version
-  * [2025-05-14a](https://github.com/dokuwiki/dokuwiki/releases/tag/release-2025-05-14a)
-  * [2025-05-14](https://github.com/dokuwiki/dokuwiki/releases/tag/release-2025-05-14)
-  * [2024-02-06b](https://github.com/dokuwiki/dokuwiki/releases/tag/release-2024-02-06b)
+* `latest` is the version of this image
+
 
 Dokuwiki is installed if not found on the volume.
 See [how to choose the installed dokuwiki version](#choose-the-installed-dokuwiki-version)
