@@ -1,53 +1,70 @@
 # Dev Contribution
 
-
 ## Entrypoint / Main
 
 The entrypoint is [dokuwiki-docker-entrypoint](../resources/dokuwiki-docker/bin/dokuwiki-docker-entrypoint)
 
 ## How to develop the Docker image
 
-* Change the dokuwiki version in [.envrc](../.envrc) if relevant
-* Change the [Dockerfile](../Dockerfile)
+* Change the dokuwiki version in:
+  * the [.envrc](../.envrc) if relevant
+  * the [Dockerfile](../Dockerfile)
 * Build
+
 ```bash
 dock-x build
 ```
+
 * Push if satisfied
+
 ```bash
-dock-x push # push 
+dock-x push # push
+```
+
+Latest:
+
+```bash
+docker image rm ghcr.io/combostrap/dokuwiki:php8.3-latest
+DOCK_X_TAG="php8.3-latest" dock-x build
 DOCK_X_TAG="php8.3-latest" dock-x push # push as latest
 ```
 
 ## How to develop the bash scripts and configuration
 
-
 ```bash
 cd ~/code/dokuwiki-docker
 ```
+
 * Use the last build as some script need DokuWiki scripts
+
 ```bash
 dock-x build
 ```
+
 * Give execution permissions on your desktop to the scripts
+
 ```bash
 chmod +755 resources/dokuwiki-docker/bin/*
 chmod +755 resources/dokuwiki-installer/bin/*
 chmod +755 resources/phpctl/bin/*
 chmod +755 resources/dokuctl/bin/*
 ```
+
 * Then run [dokuwiki-docker-run](dokuwiki-docker-run):
+
 ```bash
 dokuwiki-docker-run
 ```
+
 * Then connect with bash
+
 ```bash
 dock-x shell
 ```
-* Change 
+
+* Change
   * the scripts and rerun them
   * the configuration and reload them
-
 
 ### Caddy
 
