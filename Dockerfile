@@ -14,7 +14,7 @@ RUN xcaddy build \
 FROM php:8.3-fpm-bookworm
 
 # The build version
-ARG DOKUWIKI_VERSION_BUILD="2026-07-14a"
+ARG DOKUWIKI_VERSION_BUILD="2026-07-14b"
 
 ####################################
 # Package Installation

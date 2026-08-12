@@ -18,7 +18,7 @@ dock-x build
 * Push if satisfied
 
 ```bash
-dock-x push # push
+dock-x push
 ```
 
 Latest:
@@ -26,7 +26,7 @@ Latest:
 ```bash
 docker image rm ghcr.io/combostrap/dokuwiki:php8.3-latest
 DOCK_X_TAG="php8.3-latest" dock-x build
-DOCK_X_TAG="php8.3-latest" dock-x push # push as latest
+DOCK_X_TAG="php8.3-latest" dock-x push
 ```
 
 ## How to develop the bash scripts and configuration

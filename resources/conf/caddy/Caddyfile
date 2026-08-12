@@ -78,7 +78,7 @@
 		# Forbidden Path
 		# data is an env to be able to use data as namespace DOKU_DOCKER_SAVE_DIR
 		@forbidden {
-			path /{$DOKU_DOCKER_SAVE_DIR}/* /conf/* /bin/* /inc/*
+			path /{$DOKU_DOCKER_SAVE_DIR}/* /conf/* /bin/* /inc/* /.git*
 		}
 		handle @forbidden {
 			respond * 403
@@ -99,7 +99,6 @@
 
 		# Rewrite the home (/) to doku.php
 		rewrite / /doku.php?{query}
-
 
 		# Php-fpm Localhost only
 		@localhost {
